@@ -22,5 +22,10 @@ print(result, type(result), list(result))  # 轉 list
 scores = [50, 80, 90, 30]  # [False, True, True, False]
 result = map(lambda x: x >= 60, scores)
 print(result, type(result), list(result))
+# 動動腦
+scores = [50, 80, 90, 30]  # [0, 1, 1, 0]
+result = map(lambda x: 1 if x >= 60 else 0, scores)
+print(result, type(result), list(result))
+
 
 
