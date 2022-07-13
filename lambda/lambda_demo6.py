@@ -40,4 +40,12 @@ print(result)
 第三次歸納: x=220 y=30: 250 
 '''
 
-
+# 6. 排序 sorted(lambda parameter_list: expression, iterable)
+scores = [54, 81, 93, 32]
+scores = sorted(scores)  # 自然排序
+print(scores)
+scores = sorted(scores, reverse=True)  # 反排序
+print(scores)
+# 以除以10的餘數結果來排序
+scores = sorted(scores, key=lambda s: s%10, reverse=True)
+print(scores)
