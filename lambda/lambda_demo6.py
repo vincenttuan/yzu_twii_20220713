@@ -11,8 +11,16 @@ print(bmi_value)
 bmi_value = (lambda h, w: w / ((h/100)**2))(170, 60)
 print(bmi_value)
 
-# 過濾 filter(lambda parameter_list: expression, iterable)
+# 3. 過濾 filter(lambda parameter_list: expression, iterable)
 # iterable 指的就是數組
 nums = [50, 2, 10, 40]
 # 想要過濾出 >20 的資料
+result = filter(lambda x: x > 20, nums)
+print(result, type(result), list(result))  # 轉 list
+
+# 4. 轉換 map(lambda parameter_list: expression, iterable)
+scores = [50, 80, 90, 30]  # [False, True, True, False]
+result = map(lambda x: x >= 60, scores)
+print(result, type(result), list(result))
+
 
