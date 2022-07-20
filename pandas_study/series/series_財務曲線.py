@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 def calc(arr, ratio, return_rate):
     ret = [arr.iloc[0]]
     for v in arr[1:]:
+        print(v)
         ret.append(ret[-1] * ratio * return_rate + ret[-1] * (1-ratio) + v)
     print(ret)
     return pd.Series(ret, 預測時段)
