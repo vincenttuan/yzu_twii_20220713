@@ -23,7 +23,18 @@ df = df.astype(str)
 df = df.apply(lambda s: s.str.replace(',', ''))
 # 將證券代號設定為 index
 df = df.set_index('證券代號')
-print(df)
+# 去除非數字的資料 (coerce 表示若轉換失敗就賦予 NaN)
+df = df.apply(lambda s: pd.to_numeric(s, errors='coerce'))
+# 將欄位有 NaN的都要移除
+# axis(0:index, 1:column) 預設是 0
+# how: 'any', 'all' 預設是 'any'
+# 'any': 如果有存在任何 NaN, 則刪除該行或該列
+# 'all': 如果所有內容 NaN, 則刪除該行或該列
+df = df.dropna(axis=1, how='all')
+#print(df)
+# 查出今日收盤價比開盤價高出 8% 的股票
+#print(df['收盤價'] / df['開盤價'] >= 1.08)
+print(df[df['收盤價'] / df['開盤價'] >= 1.08])
 
 
 
