@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import io
+import sqlite3
 
 date = '20220803'
 url = 'https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=%s&type=ALLBUT0999&_=1659530272690' % date
@@ -34,7 +35,14 @@ df = df.dropna(axis=1, how='all')
 #print(df)
 # 查出今日收盤價比開盤價高出 8% 的股票
 #print(df['收盤價'] / df['開盤價'] >= 1.08)
-print(df[df['收盤價'] / df['開盤價'] >= 1.08])
+#print(df[df['收盤價'] / df['開盤價'] >= 1.08])
+#將 df 存入到 price.csv
+df.to_csv('price.csv', encoding='utf_8_sig')
+#將price.csv資料存入資料庫
+conn = sqlite3.connect('twse.db')
+df.to_sql('price', conn, if_exists='replace')  # 若日期相同要使用 replace
+#df.to_sql('price', conn, if_exists='append')  # 若日期不相同要使用 append
+
 
 
 
