@@ -15,3 +15,5 @@ a = df.cumsum(axis=0)  # 直欄 cumsum(累加) 運算
 b = df.cumsum(axis=1)  # 橫列 cumsum 運算
 print(b)
 # 直欄 + 橫列 cumsum 運算
+b = a.cumsum(axis=1)
+print(b)
