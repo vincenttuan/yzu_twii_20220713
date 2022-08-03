@@ -12,6 +12,9 @@ data = {
 }
 # print(data)
 df = pd.DataFrame(data)
+df = df.dropna()  # 將有 None 的資料列刪除
 print(df)
+print(df.loc[3])  # loc 指的是 index 欄位中的內容
+print(df.iloc[3])  # loc 指的是位置 = 3
 
 
