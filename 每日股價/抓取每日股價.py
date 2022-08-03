@@ -17,9 +17,12 @@ df = pd.read_csv(io.StringIO(data))
 # 將全部資料變為 str
 df = df.astype(str)
 # 除去內容中有[,]的資料
-def func(s):
-    return s.str.replace(',', '')
-df = df.apply(func)
+# def func(s):
+#     return s.str.replace(',', '')
+# df = df.apply(func)
+df = df.apply(lambda s: s.str.replace(',', ''))
+# 將證券代號設定為 index
+df = df.set_index('證券代號')
 print(df)
 
 
