@@ -6,13 +6,11 @@ import sqlite3
 import pandas as pd
 import mplfinance as mpf
 
-if __name__ == '__main__':
+def save_candle_chart(symbol, amount):
     # 資料庫路徑
     db_path = '../資料庫/財經資料庫.db'
     conn = sqlite3.connect(db_path)
     # 查找某一檔股票最近n天的股價資料
-    symbol = '0050'
-    amount = '20'
     sql = '''
         select 交易日 as Date, 開盤價 as Open, 最高價 as 'High',
                最低價 as Low, 收盤價 as Close, 成交金額 as Volume
@@ -34,5 +32,9 @@ if __name__ == '__main__':
     myfigsize = (800/mydpi, 600/mydpi)
     # mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize)
     mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize, savefig='chart.png')
+
+
+if __name__ == '__main__':
+    save_candle_chart('2330', 2)
 
 
