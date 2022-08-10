@@ -8,14 +8,17 @@ import mplfinance as mpf
 from 繪製股價走勢圖.走勢圖 import save_candle_chart
 
 def draw_chart():
-    pass
+    save_candle_chart(symbol.get(), amount.get(), True, mydpi=100, mav=(3, 6, 9))
+    # 將 chart.png 放入到 chartLabel 中
+    photo = ImageTk.PhotoImage(Image.open('chart.png'))
+    chartLabel.config(image=photo)
+    chartLabel.image = photo
 
 def exit_form():
     root.destroy()
     root.quit()
 
 if __name__ == '__main__':
-    # save_candle_chart('2330', 20, False, mydpi=100, mav=(3, 6))
     root = tkinter.Tk()
     root.geometry("800x600")
     root.title("股價走勢圖")
@@ -24,13 +27,15 @@ if __name__ == '__main__':
     myfont2 = font.Font(family='Arial', size=15)
 
     symbol = tkinter.StringVar()
+    symbol.set('2330')
     amount = tkinter.IntVar()
+    amount.set(30)
 
     # view 元件
     symbolLabel = tkinter.Label(root, text='股票代號', font=myfont)
     symbolEntry = tkinter.Entry(root, textvariable=symbol, font=myfont2)
     amountLabel = tkinter.Label(root, text='交易天數', font=myfont)
-    amountEntry = tkinter.Entry(root, textvariable=symbol, font=myfont2)
+    amountEntry = tkinter.Entry(root, textvariable=amount, font=myfont2)
     drawButton = tkinter.Button(root, text='繪圖', command=lambda: draw_chart(), font=myfont)
     exitButton = tkinter.Button(root, text='離開',command=lambda: exit_form(), font=myfont)
     chartLabel = tkinter.Label(root, font=myfont)
