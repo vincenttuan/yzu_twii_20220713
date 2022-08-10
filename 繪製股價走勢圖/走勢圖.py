@@ -26,6 +26,6 @@ if __name__ == '__main__':
     data.index = pd.DatetimeIndex(data['Date'])
     print(data)
 
-    mpf.plot(data)
-
+    # mpf.plot(data)
+    mpf.plot(data, type='candle')
 
