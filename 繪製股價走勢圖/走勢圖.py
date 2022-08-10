@@ -27,5 +27,7 @@ if __name__ == '__main__':
     print(data)
 
     # mpf.plot(data)
-    mpf.plot(data, type='candle')
+    # mpf.plot(data, type='candle')
+    mpf.plot(data, type='candle', mav=(3, 6, 9))
+
 
