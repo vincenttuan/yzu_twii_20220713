@@ -6,7 +6,7 @@ import sqlite3
 import pandas as pd
 import mplfinance as mpf
 
-def save_candle_chart(symbol, amount):
+def save_candle_chart(symbol, amount, savefile):
     # 資料庫路徑
     db_path = '../資料庫/財經資料庫.db'
     conn = sqlite3.connect(db_path)
@@ -30,11 +30,15 @@ def save_candle_chart(symbol, amount):
     # mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True)
     mydpi = 135
     myfigsize = (800/mydpi, 600/mydpi)
-    # mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize)
-    mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize, savefig='chart.png')
+    if savefile == True:
+        mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize, savefig='chart.png')
+    else:
+        mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize)
+
 
 
 if __name__ == '__main__':
-    save_candle_chart('2330', 2)
+    save_candle_chart('2330', 20, True)
+
 
 
