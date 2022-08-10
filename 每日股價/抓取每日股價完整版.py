@@ -9,6 +9,7 @@ from datetime import date, timedelta
 # 抓取每日股價並存入資料庫中
 def create_record(date):
     url = 'https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=%s&type=ALLBUT0999&_=1659530272690' % date
+    print(url)
     r = requests.get(url)
     lines = r.text.split("\n")
     # for line in lines:
@@ -40,7 +41,7 @@ def create_record(date):
     df.to_sql('price', conn, if_exists='append')
 
 if __name__ == '__main__':
-    begin_day = date(2020, 1, 2)
+    begin_day = date(2020, 1, 3)
     today = date.today()
     diff = today - begin_day
     all_date = (begin_day + timedelta(n) for n in range(diff.days+1))
@@ -51,7 +52,7 @@ if __name__ == '__main__':
              yyyy = single_date.strftime("%Y")
              mm = single_date.strftime("%m")
              dd = single_date.strftime("%d")
-             target_date = yyyy + '-' + mm + '-' + dd
+             target_date = yyyy + '' + mm + '' + dd
              create_record(target_date)
              print('新增完成: ')
          except Exception as e:
