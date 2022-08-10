@@ -1,7 +1,10 @@
+import time
+
 import requests
 import pandas as pd
 import io
 import sqlite3
+from datetime import date, timedelta
 
 # 抓取每日股價並存入資料庫中
 def create_record(date):
@@ -30,11 +33,29 @@ def create_record(date):
     df = df.apply(lambda s: pd.to_numeric(s, errors='coerce'))
     # 將欄位有 NaN的都要移除
     df = df.dropna(axis=1, how='all')
+    print(df)
     # 先將 df 存成 csv 再轉存到 sqlite
     df.to_csv("price.csv", encoding="utf-8")  # utf-8_sig
     conn = sqlite3.connect('../資料庫/財經資料庫.db')
     df.to_sql('price', conn, if_exists='append')
 
 if __name__ == '__main__':
-    today = '2022-08-10'
-    create_record(today)
+    begin_day = date(2020, 1, 2)
+    today = date.today()
+    diff = today - begin_day
+    all_date = (begin_day + timedelta(n) for n in range(diff.days+1))
+    for single_date in all_date:
+         print(str(single_date), end=" ")
+         try:
+             time.sleep(7)
+             yyyy = single_date.strftime("%Y")
+             mm = single_date.strftime("%m")
+             dd = single_date.strftime("%d")
+             target_date = yyyy + '-' + mm + '-' + dd
+             create_record(target_date)
+             print('新增完成: ')
+         except Exception as e:
+             print('無資料: ' + str(e))
+
+
+
