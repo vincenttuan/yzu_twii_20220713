@@ -20,5 +20,9 @@ if __name__ == '__main__':
         where 證券代號 = '%s' order by 交易日 desc limit %s        
     ''' % (symbol, amount)
     print(sql)
+    # 將資料讀進 DataFrame
+    data = pd.read_sql(sql, conn)
+    data.index = pd.DatetimeIndex(data['Date'])
+    print(data)
 
 
