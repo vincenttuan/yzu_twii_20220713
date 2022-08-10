@@ -22,7 +22,10 @@ if __name__ == '__main__':
     print(sql)
     # 將資料讀進 DataFrame
     data = pd.read_sql(sql, conn)
+    data = data.sort_index(ascending=False)  # 根據 index 由大到小
     data.index = pd.DatetimeIndex(data['Date'])
     print(data)
+
+    mpf.plot(data)
 
 
