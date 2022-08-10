@@ -35,6 +35,9 @@ if __name__ == '__main__':
     exitButton = tkinter.Button(root, text='離開',command=lambda: exit_form(), font=myfont)
     chartLabel = tkinter.Label(root, font=myfont)
 
+    root.rowconfigure(1, weight=1)
+    root.columnconfigure((4, 5), weight=1)
+
     # view 元件布局
     symbolLabel.grid(row=0, column=0, sticky='EWNS')
     symbolEntry.grid(row=0, column=1, sticky='EWNS')
