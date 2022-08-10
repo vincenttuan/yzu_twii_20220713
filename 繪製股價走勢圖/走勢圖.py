@@ -28,6 +28,11 @@ if __name__ == '__main__':
 
     # mpf.plot(data)
     # mpf.plot(data, type='candle')
-    mpf.plot(data, type='candle', mav=(3, 6, 9))
+    # mpf.plot(data, type='candle', mav=(3, 6, 9))
+    # mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True)
+    mydpi = 135
+    myfigsize = (800/mydpi, 600/mydpi)
+    # mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize)
+    mpf.plot(data, type='candle', mav=(3, 6, 9), volume=True, figsize=myfigsize, savefig='chart.png')
 
 
