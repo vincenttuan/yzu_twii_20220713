@@ -95,16 +95,20 @@ if __name__ == '__main__':
     close = tx['收盤價']  # close 是一個 Series
     # Series 運算
     buy = (k > d) & (k.shift() < d.shift()) & (k < 20) & (d < 30)
+    sell = (k < d) & (k.shift() > d.shift()) & (k > 90) & (d > 90)
     # print(buy)
-    filter = (buy == True)  # 過濾出資料是 True
-    print(buy[filter])
+    filter1 = (buy == True)  # 過濾出資料是 True
+    filter2 = (sell == True)  # 過濾出資料是 True
+    print(buy[filter1])
+    print(sell[filter2])
     # 繪圖
     # 因為 buy 是 bool 所以要繪圖之前請先轉成 int
     buy = buy.astype(int)  # True -> 1, False -> 0
     close.plot(label='close', color='gray')  # 繪製 close 線
     plt.legend()  # 圖例
     buy.plot(secondary_y=True, label='BUY', color='red')
-
+    sell.plot(secondary_y=True, label='SELL', color='green')
+    plt.legend()  # 圖例
     # close.plot(secondary_y=True, label='close', color='gray')  # 繪製 close 線
     # plt.legend()  # 圖例
 
