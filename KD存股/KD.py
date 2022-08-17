@@ -84,6 +84,6 @@ if __name__ == '__main__':
     # close.plot(secondary_y=True, label='close', color='gray')  # 繪製 close 線
     # plt.legend()  # 圖例
 
-    plt.title('KD index')  # 圖標題
+    plt.title(symbol + ' KD index ' + days + ' days')  # 圖標題
     plt.show()
 
