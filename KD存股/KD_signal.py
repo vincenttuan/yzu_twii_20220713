@@ -104,6 +104,7 @@ if __name__ == '__main__':
     # 繪圖
     # 因為 buy 是 bool 所以要繪圖之前請先轉成 int
     buy = buy.astype(int)  # True -> 1, False -> 0
+    sell = sell.astype(int)  # True -> 1, False -> 0
     close.plot(label='close', color='gray')  # 繪製 close 線
     plt.legend()  # 圖例
     buy.plot(secondary_y=True, label='BUY', color='red')
