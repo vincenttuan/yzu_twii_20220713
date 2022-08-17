@@ -5,6 +5,7 @@ import pandas as pd
 import io
 import sqlite3
 from datetime import date, timedelta
+from 每日股價.抓取price資料表最大日期 import get_begin_day
 
 # 抓取每日股價並存入資料庫中
 def create_record(date):
@@ -41,7 +42,8 @@ def create_record(date):
     df.to_sql('price', conn, if_exists='append')
 
 if __name__ == '__main__':
-    begin_day = date(2010, 1, 2)
+    #begin_day = date(2010, 1, 2)
+    begin_day = get_begin_day()
     today = date.today()
     diff = today - begin_day
     all_date = (begin_day + timedelta(n) for n in range(diff.days+1))
