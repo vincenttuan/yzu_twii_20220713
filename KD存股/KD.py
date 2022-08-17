@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
+    symbol = '0050'
+    days = '100'
     # 顯示所有欄位
     pd.set_option('display.max_columns', None)
     # 顯示所有列
@@ -17,10 +19,10 @@ if __name__ == '__main__':
     sql = '''
         SELECT 交易日 AS date, 開盤價, 最高價, 最低價, 收盤價 
         FROM price 
-        WHERE 證券代號 = '0050' 
+        WHERE 證券代號 = '%s' 
         ORDER BY 交易日 DESC
-        LIMIT 100
-    '''
+        LIMIT %s
+    ''' % (symbol, days)
     # print(sql)
     # 將資料讀入 pandas DataFrame
     tx = pd.read_sql(sql, conn)
@@ -76,7 +78,12 @@ if __name__ == '__main__':
     # print(close, type(close))
     k.plot(label='K', color='orange')  # 繪製 K 線
     d.plot(label='D', color='blue')  # 繪製 D 線
-    plt.title('KD index')  # 圖標題
+    close.plot(label='close', color='gray')  # 繪製 close 線
     plt.legend()  # 圖例
+
+    # close.plot(secondary_y=True, label='close', color='gray')  # 繪製 close 線
+    # plt.legend()  # 圖例
+
+    plt.title('KD index')  # 圖標題
     plt.show()
 
