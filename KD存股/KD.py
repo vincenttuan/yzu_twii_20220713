@@ -19,7 +19,7 @@ if __name__ == '__main__':
         FROM price 
         WHERE 證券代號 = '0050' 
         ORDER BY 交易日 DESC
-        LIMIT 1000
+        LIMIT 100
     '''
     # print(sql)
     # 將資料讀入 pandas DataFrame
@@ -65,4 +65,18 @@ if __name__ == '__main__':
         D = (2/3) * D + (1/3) * k
         return D
     tx['D'] = tx['K'].apply(DValue)
-    print(tx)
+    # print(tx)
+
+    # 繪圖
+    k = tx['K']  # k 是一個 Series
+    d = tx['D']  # d 是一個 Series
+    close = tx['收盤價']  # close 是一個 Series
+    # print(k, type(k))
+    # print(d, type(d))
+    # print(close, type(close))
+    k.plot(label='K', color='orange')  # 繪製 K 線
+    d.plot(label='D', color='blue')  # 繪製 D 線
+    plt.title('KD index')  # 圖標題
+    plt.legend()  # 圖例
+    plt.show()
+
