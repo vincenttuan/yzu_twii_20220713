@@ -22,4 +22,6 @@ if __name__ == '__main__':
         LIMIT 1000
     '''
     print(sql)
-
+    # 將資料讀入 pandas DataFrame
+    tx = pd.read_sql(sql, conn)
+    print(tx)
