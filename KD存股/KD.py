@@ -21,7 +21,21 @@ if __name__ == '__main__':
         ORDER BY 交易日 DESC
         LIMIT 1000
     '''
-    print(sql)
+    # print(sql)
     # 將資料讀入 pandas DataFrame
     tx = pd.read_sql(sql, conn)
+    # 建立 index
+    tx.index.name = 'date'
+    # 資料排序
+    tx = tx.sort_index(ascending=False)
+    # 將 index 轉為日期格式
+    tx.index = pd.DatetimeIndex(tx['date'])
+    # print(tx)
+    print('--------------------------------------------------------------')
+    # RSV
+    # RSV = (今日收盤價 - 最近9日的最低價) / (最近9日的最高價 - 最近9日的最低價) * 100
+    # 計算最近9日的最高價
+    tx['9dMax'] = tx['最高價'].rolling(9).max()
+    # 計算最近9日的最低價
+    tx['9dMin'] = tx['最低價'].rolling(9).min()
     print(tx)
