@@ -55,4 +55,14 @@ if __name__ == '__main__':
         return K
     tx['K'] = 0
     tx['K'] = tx['RSV'].apply(KValue)
+
+    # 計算 D 值
+    # D 是 K值 和前一日 D 值的加權平均
+    # D = (2/3) * D + (1/3) * k
+    D = 0
+    def DValue(k):
+        global D
+        D = (2/3) * D + (1/3) * k
+        return D
+    tx['D'] = tx['K'].apply(DValue)
     print(tx)
