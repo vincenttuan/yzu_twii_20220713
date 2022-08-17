@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    symbol = '0050'
+    symbol = '2330'
     days = '100'
     # 顯示所有欄位
     pd.set_option('display.max_columns', None)
@@ -85,5 +85,6 @@ if __name__ == '__main__':
     # plt.legend()  # 圖例
 
     plt.title(symbol + ' KD index ' + days + ' days')  # 圖標題
+    plt.grid()  # 格線
     plt.show()
 
