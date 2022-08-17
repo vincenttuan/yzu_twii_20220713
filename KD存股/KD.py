@@ -43,5 +43,16 @@ if __name__ == '__main__':
     # 計算 RSV
     tx['RSV'] = 0
     tx['RSV'] = 100 * (tx['收盤價'] - tx['9dMin']) / (tx['9dMax'] - tx['9dMin'])
-    print(tx)
+    # print(tx)
     print('--------------------------------------------------------------')
+    # 計算 K 值
+    # K 是 RSV 和前一日 K 值的加權平均
+    # K = (2/3) * K + (1/3) * rsv
+    K = 0
+    def KValue(rsv):
+        global K
+        K = (2/3) * K + (1/3) * rsv
+        return K
+    tx['K'] = 0
+    tx['K'] = tx['RSV'].apply(KValue)
+    print(tx)
