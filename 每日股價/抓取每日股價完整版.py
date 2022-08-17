@@ -42,8 +42,8 @@ def create_record(date):
     df.to_sql('price', conn, if_exists='append')
 
 if __name__ == '__main__':
-    #begin_day = date(2010, 1, 2)
-    begin_day = get_begin_day()
+    # begin_day = date(2010, 1, 2) # 自行設定起始日期
+    begin_day = get_begin_day()  # 根據資料庫目前最大日期 + 1
     today = date.today()
     diff = today - begin_day
     all_date = (begin_day + timedelta(n) for n in range(diff.days+1))
