@@ -26,7 +26,8 @@ https://drive.google.com/drive/folders/18tQFcCTkT5jv-dda7_jTWG_ez6OVLpCb?usp=sha
     # 黃金交叉的買進訊號: 今天 k > d (K線向上突破D線) 昨天 k < d
     # 死亡交叉的賣出訊號: 今天 k < d (K線向下貫穿D線) 昨天 k > d
     # 判斷市場行情一般來說都是使用 D 值的數據
-    # D > 80: 超買區 D < 15, D < 20 或 D < 30 : 超賣區
+    # D > 80: 超買區 
+    # D < 15, D < 20 或 D < 30 : 超賣區
     # D = 50: 多空平衡
     # D > 50 : 多頭佔上風
     # D < 50 : 空頭佔上風
