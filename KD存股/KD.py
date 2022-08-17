@@ -6,7 +6,7 @@ if __name__ == '__main__':
     # 顯示所有欄位
     pd.set_option('display.max_columns', None)
     # 顯示所有列
-    pd.set_option('display.max_rows', None)
+    # pd.set_option('display.max_rows', None)
     # 設定列表寬度
     pd.set_option('display.width', 500)
     # 資料庫路徑
@@ -38,4 +38,10 @@ if __name__ == '__main__':
     tx['9dMax'] = tx['最高價'].rolling(9).max()
     # 計算最近9日的最低價
     tx['9dMin'] = tx['最低價'].rolling(9).min()
+    # 刪除 NaN
+    tx = tx.dropna()
+    # 計算 RSV
+    tx['RSV'] = 0
+    tx['RSV'] = 100 * (tx['收盤價'] - tx['9dMin']) / (tx['9dMax'] - tx['9dMin'])
     print(tx)
+    print('--------------------------------------------------------------')
