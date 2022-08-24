@@ -51,8 +51,10 @@ def get_monthly_report(year, month):
     # 變更 index 名稱
     # '交易日', '公司代號' 改成 'date', 'stock_id'
     df.index.names = ['date', 'stock_id']
-    print(df)
+    return df
+
 
 
 if __name__ == '__main__':
-    get_monthly_report(2021, 10)
+    df = get_monthly_report(2021, 10)
+    print(df)
