@@ -3,6 +3,8 @@
 # 彙總報表 > 營用概況 > 每月營收 > 採用IFRSs後每月營業收入彙總表
 # IFRS 國際會計準則
 # 範例路徑: https://mops.twse.com.tw/nas/t21/sii/t21sc03_110_10_0.html
+import time
+
 import requests
 import pandas as pd
 import sqlite3
@@ -53,8 +55,23 @@ def get_monthly_report(year, month):
     df.index.names = ['date', 'stock_id']
     return df
 
-
+# 匯入資料庫
+def import_monthly_report(df, db_path):
+    # 將 df 存成 csv
+    # df.to_csv('monthly_report.csv', encoding='utf_8_sig')
+    conn = sqlite3.connect(db_path)
+    df.to_sql('monthly_report', conn, if_exists='append')
 
 if __name__ == '__main__':
-    df = get_monthly_report(2021, 10)
-    print(df)
+    for year in range(2020, 2022+1):
+        for month in range(1, 12+1):
+            time.sleep(7)
+            try:
+                print(year, month, "抓取中...", end=' ')
+                df = get_monthly_report(year, month)
+                #print(df)
+                import_monthly_report(df, 'test.db')
+                print("成功")
+                # ../資料庫/財經資料庫.db
+            except Exception as e:
+                print("Fail:", str(e))
