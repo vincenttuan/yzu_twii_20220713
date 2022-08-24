@@ -5,6 +5,7 @@
 # 範例路徑: https://mops.twse.com.tw/nas/t21/sii/t21sc03_110_10_0.html
 import time
 import datetime
+
 import requests
 import pandas as pd
 import sqlite3
@@ -66,21 +67,18 @@ def import_monthly_report(df, db_path):
     df.to_sql('monthly_report', conn, if_exists='append')
 
 if __name__ == '__main__':
-    '''
-    begin_date = get_begin_month()
-    print(begin_date.year, begin_date.month)
-    today_year = datetime.date.today().year
-    print(today_year)
-    '''
-    for year in range(2020, 2022+1):
-        for month in range(1, 12+1):
-            time.sleep(7)
-            try:
-                print(year, month, "抓取中...", end=' ')
-                df = get_monthly_report(year, month)
-                #print(df)
-                import_monthly_report(df, '../資料庫/財經資料庫.db')
-                print("成功")
-                # ../資料庫/財經資料庫.db
-            except Exception as e:
-                print("Fail:", str(e))
+    # start_date = datetime.date(2020, 1, 1)
+    start_date = get_begin_month()
+    end_date = datetime.date.today()
+    daterange = pd.date_range(start_date, end_date, freq='M')
+    for date in daterange:
+        time.sleep(7)
+        try:
+            print(date.year, date.month, "抓取中...", end=' ')
+            df = get_monthly_report(date.year, date.month)
+            #print(df)
+            import_monthly_report(df, '../資料庫/財經資料庫.db')
+            print("成功")
+            # ../資料庫/財經資料庫.db
+        except Exception as e:
+            print("Fail:", str(e))
