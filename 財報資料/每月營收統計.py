@@ -4,11 +4,14 @@
 # IFRS 國際會計準則
 # 範例路徑: https://mops.twse.com.tw/nas/t21/sii/t21sc03_110_10_0.html
 import time
-
+import datetime
 import requests
 import pandas as pd
 import sqlite3
 from io import StringIO
+
+from 財報資料.抓取monthly_report資料表最大日期 import get_begin_month
+
 
 def get_monthly_report(year, month):
     # 取得上市公司xxx年xx月份(累計與當月)營業收入統計表路徑
@@ -63,6 +66,12 @@ def import_monthly_report(df, db_path):
     df.to_sql('monthly_report', conn, if_exists='append')
 
 if __name__ == '__main__':
+    '''
+    begin_date = get_begin_month()
+    print(begin_date.year, begin_date.month)
+    today_year = datetime.date.today().year
+    print(today_year)
+    '''
     for year in range(2020, 2022+1):
         for month in range(1, 12+1):
             time.sleep(7)
