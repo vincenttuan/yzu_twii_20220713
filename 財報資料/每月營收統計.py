@@ -13,8 +13,32 @@ def get_monthly_report(year, month):
     url = 'https://mops.twse.com.tw/nas/t21/sii/t21sc03_%d_%d_0.html' % (year-1911, month)
     # 抓取網頁
     r = requests.get(url)
-    print(r.text)
-    pass
+    r.encoding = 'big5'
+    # 將網頁資料透過 StringIO 給 pandas 讀取
+    # 安裝 lxml 套件
+    dfs = pd.read_html(StringIO(r.text))
+    print(len(dfs))
+    # 顯示所有欄,列
+    pd.set_option('display.max.columns', None)
+    pd.set_option('display.max.rows', None)
+    # 設定欄寬
+    pd.set_option('display.width', 5000)
+    '''
+    for df in dfs:
+        # shape 得到表格的 (rows, columns) 資料
+        # print(df.shape, df.shape[0], df.shape[1])
+        if df.shape[1] == 11:
+            print(df)
+    '''
+    # print([df for df in dfs if df.shape[1] == 11])
+    df = pd.concat([df for df in dfs if df.shape[1] == 11])
+
+    # 設定 column 名稱
+    # print(df.columns.get_level_values(0))
+    # print(df.columns.get_level_values(1))
+    df.columns = df.columns.get_level_values(1)
+    print(df)
+
 
 if __name__ == '__main__':
     get_monthly_report(2021, 10)
