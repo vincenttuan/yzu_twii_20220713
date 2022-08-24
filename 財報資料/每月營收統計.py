@@ -37,6 +37,11 @@ def get_monthly_report(year, month):
     # print(df.columns.get_level_values(0))
     # print(df.columns.get_level_values(1))
     df.columns = df.columns.get_level_values(1)
+
+    # 過濾資料
+    # 將公司代號欄位中有出現'合計'或'總計'的紀錄刪除
+    df = df[df['公司代號'] != '合計']
+    df = df[df['公司代號'] != '總計']
     print(df)
 
 
