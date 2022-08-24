@@ -70,7 +70,7 @@ if __name__ == '__main__':
                 print(year, month, "抓取中...", end=' ')
                 df = get_monthly_report(year, month)
                 #print(df)
-                import_monthly_report(df, 'test.db')
+                import_monthly_report(df, '../資料庫/財經資料庫.db')
                 print("成功")
                 # ../資料庫/財經資料庫.db
             except Exception as e:
