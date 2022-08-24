@@ -42,6 +42,15 @@ def get_monthly_report(year, month):
     # 將公司代號欄位中有出現'合計'或'總計'的紀錄刪除
     df = df[df['公司代號'] != '合計']
     df = df[df['公司代號'] != '總計']
+    # 將當月營收數字化若當月營收不能變為數字的以 NaN 取代(errors='coerce')
+    df['當月營收'] = pd.to_numeric(df['當月營收'], 'coerce')
+    # 新增交易日欄位
+    df['交易日'] = '%d-%d-10' % (year, month)
+    # 將交易日與公司代號設定複合 index (共列 index)
+    df = df.set_index(['交易日', '公司代號'])
+    # 變更 index 名稱
+    # '交易日', '公司代號' 改成 'date', 'stock_id'
+    df.index.names = ['date', 'stock_id']
     print(df)
 
 
