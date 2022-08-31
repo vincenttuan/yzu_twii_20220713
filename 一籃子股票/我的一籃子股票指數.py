@@ -9,9 +9,7 @@ import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def basket():
-    # 選擇一個有交易的日期當作買入日期
-    tday = datetime.date(2022, 7, 1)
+def basket(tday):
     conn = sqlite3.connect('../資料庫/財經資料庫.db')
     # 股價 >= 2022, 7, 1
     sql = '''
@@ -71,7 +69,9 @@ def basket():
     return cond, index
 
 if __name__ == '__main__':
-    cond, index  =basket()
+    # 選擇一個有交易的日期當作買入日期
+    tday = datetime.date(2022, 7, 1)
+    cond, index = basket(tday)
     # 繪圖
     index.plot()
     plt.show()
