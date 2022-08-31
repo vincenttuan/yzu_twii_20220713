@@ -48,13 +48,19 @@ if __name__ == '__main__':
     cond, index, roi = basket(tday)
     print('cond:', cond)
     # 投資金額
-    money = 2000000
+    money = 4000000
     # 建議投資分配
     ret, sum, price = portfolio(cond, money)
     print('----------------------')
     print('買進標的的張數:', ret)
     print('買進標的價格:', price.iloc[0][ret.index])
     print('預估投資金額:', money)
+    print('預估買進股票檔數:', len(cond))
     print('實際投資金額:', sum)
-    print('買進股票檔數:', len(ret))
+    print('實際買進股票檔數:', len(ret))
+
+    if (len(ret) == len(cond)):
+        print('報酬率: %.2f%%' % (roi * 100))
+    else:
+        print('報酬率: 無(不足 %d 檔)' % (len(cond)))
 
