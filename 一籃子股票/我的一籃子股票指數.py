@@ -66,12 +66,12 @@ def basket(tday):
     print('建議買進:', cond)
     print('回測報酬率: %.2f%%' % (roi*100))
 
-    return cond, index
+    return cond, index, roi
 
 if __name__ == '__main__':
     # 選擇一個有交易的日期當作買入日期
     tday = datetime.date(2022, 7, 1)
-    cond, index = basket(tday)
+    cond, index, roi = basket(tday)
     # 繪圖
     index.plot()
     plt.show()

@@ -37,14 +37,24 @@ def portfolio(stock_list, money):
         else:
             break;
 
+    # 總投資金額
+    sum = (stock_list * ret * 1000).sum()
+    return ret, sum, price
 
 if __name__ == '__main__':
     # 選擇一個有交易的日期當作買入日期
     tday = datetime.date(2022, 7, 1)
     # 建議投資標的
-    cond, index = basket(tday)
+    cond, index, roi = basket(tday)
     print('cond:', cond)
     # 投資金額
     money = 2000000
     # 建議投資分配
-    portfolio(cond, money)
+    ret, sum, price = portfolio(cond, money)
+    print('----------------------')
+    print('買進標的的張數:', ret)
+    print('買進標的價格:', price.iloc[0][ret.index])
+    print('預估投資金額:', money)
+    print('實際投資金額:', sum)
+    print('買進股票檔數:', len(ret))
+
