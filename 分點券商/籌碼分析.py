@@ -22,6 +22,12 @@ def parse_data(text):
 # 主程式
 if __name__ == '__main__':
     symbol = '1101'  # 股票代號
-
+    # 顯示所有列
+    pd.set_option('display_max_rows', None)
+    # 建立 session
+    rs = requests.session()
+    viewstatus, eventvalidation = get_code(rs)
+    print('viewstatus', viewstatus)
+    print('eventvalidation', eventvalidation)
 
 
