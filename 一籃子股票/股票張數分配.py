@@ -6,7 +6,7 @@ import pandas as pd
 import datetime
 
 # 分配張數
-def portfolio(cond, money):
+def portfolio(stock_list, money):
     # 取得最新股價
     conn = sqlite3.connect('../資料庫/財經資料庫.db')
     sql = '''
@@ -17,8 +17,10 @@ def portfolio(cond, money):
     price = pd.read_sql(sql, conn, parse_dates=['date']) \
         .pivot(index='date', columns='stock_id')['收盤價']
     print(price)
+    print(stock_list)
 
-
+    stock_list = price.iloc[0][stock_list]
+    print(stock_list)
 
 if __name__ == '__main__':
     # 選擇一個有交易的日期當作買入日期
