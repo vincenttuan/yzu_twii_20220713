@@ -9,7 +9,7 @@ import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
 
-if __name__ == '__main__':
+def basket():
     # 選擇一個有交易的日期當作買入日期
     tday = datetime.date(2022, 7, 1)
     conn = sqlite3.connect('../資料庫/財經資料庫.db')
@@ -68,6 +68,10 @@ if __name__ == '__main__':
     print('建議買進:', cond)
     print('回測報酬率: %.2f%%' % (roi*100))
 
+    return cond, index
+
+if __name__ == '__main__':
+    cond, index  =basket()
     # 繪圖
     index.plot()
     plt.show()
