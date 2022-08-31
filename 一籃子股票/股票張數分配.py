@@ -10,9 +10,13 @@ def portfolio(cond, money):
     # 取得最新股價
     conn = sqlite3.connect('../資料庫/財經資料庫.db')
     sql = '''
-        select 證券代號 as stock_id, 交易日 as date, 收盤價 from price
-        where date = %s
-    '''
+            select 證券代號 as stock_id, 交易日 as date, 收盤價 from price
+            where date == '%s'
+        ''' % (tday)
+    # print(sql)
+    price = pd.read_sql(sql, conn, parse_dates=['date']) \
+        .pivot(index='date', columns='stock_id')['收盤價']
+    print(price)
 
 
 
